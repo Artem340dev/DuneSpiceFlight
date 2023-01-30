@@ -1,0 +1,10 @@
+name: DuneSpiceFlight
+main: org.millida.dunespiceflight.DuneSpiceFlightPlugin
+version: 1.0.0
+api-version: 1.13
+author: MillidaStudio
+softdepend: [Towny, Multiverse-Core, Vault]
+commands:
+  dunespiceflight:
+    usage: /dunespiceflight
+    aliases: [dsf]

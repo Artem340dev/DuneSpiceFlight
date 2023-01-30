@@ -1,0 +1,20 @@
+rocketResources:
+  1:
+    material: COAL
+    amount: 64
+  2:
+    material: REDSTONE
+    amount: 64
+
+rocketItem:
+  name: "&bРакета"
+  lore:
+    - ""
+    - "&7Это реально ракета!!"
+  material: GOLD_INGOT
+  customModelData: 123456789
+
+rocketMaxHealth: 700
+rocketPrice: 100000
+rocketMaxDestinations: 3
+canArmorStandVisible: true
