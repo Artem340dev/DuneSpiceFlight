@@ -29,8 +29,6 @@ public class PlayersConfiguration extends AbstractConfiguration {
                     int y = configuration.getInt("players." + playerName + "." + worldName + "." + locationId + ".y");
                     int z = configuration.getInt("players." + playerName + "." + worldName + "." + locationId + ".z");
 
-                    System.out.println("SAVE MY LOVE TONIGHT: " + world);
-
                     rocketWorld.addLocation(Integer.parseInt(locationId), new Location(world, x, y, z));
                 }
 
