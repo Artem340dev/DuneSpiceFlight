@@ -6,7 +6,9 @@ import org.millida.dunespiceflight.utils.RocketManager;
 import org.millida.dunespiceflight.utils.ItemUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainConfiguration extends AbstractConfiguration {
     public MainConfiguration() {
@@ -39,6 +41,7 @@ public class MainConfiguration extends AbstractConfiguration {
         double rocketMaxHealth = configuration.getDouble("rocketMaxHealth");
         boolean canArmorStandVisible = configuration.getBoolean("canArmorStandVisible");
 
+        RocketManager.setCanArmorStandVisible(canArmorStandVisible);
         RocketManager.setRocketMaxDestinations(rocketMaxDestinations);
         RocketManager.setRocketResources(rocketResources);
         RocketManager.setRocketMaxHeatlh(rocketMaxHealth);
@@ -49,7 +52,20 @@ public class MainConfiguration extends AbstractConfiguration {
         Material rocketMaterial = Material.valueOf(configuration.getString("rocketItem.material"));
         int rocketCustomModelData = configuration.getInt("rocketItem.customModelData");
 
+        String rocketArmorHeadName = configuration.getString("rocketArmorHeadItem.name");
+        List<String> rocketArmorHeadLore = configuration.getStringList("rocketArmorHeadItem.lore");
+        Material rocketArmorHeadMaterial = Material.valueOf(configuration.getString("rocketArmorHeadItem.material"));
+        int rocketArmorHeadCustomModelData = configuration.getInt("rocketArmorHeadItem.customModelData");
+        Map<String, Integer> tags = new HashMap<>();
+
+        for (String key : configuration.getConfigurationSection("rocketArmorHeadItem.tags").getKeys(false)) {
+            int value = configuration.getInt("rocketArmorHeadItem.tags." + key);
+            tags.put(key, value);
+        }
+
         RocketManager.setRocketItem(ItemUtil.getItem(rocketName, rocketLore, rocketMaterial, 1, rocketCustomModelData));
+        RocketManager.setRocketArmorHeadItem(ItemUtil.getItem(rocketArmorHeadName, rocketArmorHeadLore, rocketArmorHeadMaterial, 1, rocketArmorHeadCustomModelData));
+        RocketManager.setTags(tags);
     }
 
     @Override

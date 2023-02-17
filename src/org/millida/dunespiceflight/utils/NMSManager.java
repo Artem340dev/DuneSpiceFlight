@@ -5,14 +5,25 @@ import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class NMSManager {
-    public static void setNBTTag(Entity entity, String name, boolean value) {
+    public static void setNBTTag(Entity entity, String key, int value) {
         net.minecraft.server.v1_16_R3.Entity nmsEntity = ((CraftEntity) entity).getHandle();
-        EntityLiving nmsEntityLiving = (EntityLiving) nmsEntity;
 
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setBoolean(name, value);
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        nbtTagCompound.setInt(key, value);
 
-        nmsEntity.a_(tag);
+        nmsEntity.a_(nbtTagCompound);
+    }
+
+    public static void setNBTTags(Entity entity, Map<String, Integer> tags) {
+        net.minecraft.server.v1_16_R3.Entity nmsEntity = ((CraftEntity) entity).getHandle();
+
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        tags.forEach((key, value) -> nbtTagCompound.setInt(key, value));
+
+        nmsEntity.a_(nbtTagCompound);
     }
 }
