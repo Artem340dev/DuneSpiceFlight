@@ -3,9 +3,24 @@ package org.millida.dunespiceflight.utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_16_R3.block.CraftBlock;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Field;
+
 public class WorldManager {
+    public static void setResistance(Block block, float resistance) {
+        net.minecraft.server.v1_16_R3.Block nmsBlock = ((CraftBlock) block).getNMS().getBlock();
+
+        try {
+            Field field = net.minecraft.server.v1_16_R3.Block.class.getDeclaredField("strength");
+            field.setAccessible(true);
+            field.setFloat(nmsBlock, resistance);
+        } catch (Exception e) {
+        }
+    }
+
     public static Location getRandomLocationAtWorldForPlayer(Player player, World world, int min, int max) {
         Location loc;
 

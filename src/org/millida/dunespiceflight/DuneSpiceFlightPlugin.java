@@ -8,6 +8,7 @@ import org.millida.dunespiceflight.configuration.PlayersConfiguration;
 import org.millida.dunespiceflight.handlers.InventoryHandler;
 import org.millida.dunespiceflight.handlers.WorldHandler;
 import org.millida.dunespiceflight.inventory.RocketFlightPanelInventory;
+import org.millida.dunespiceflight.objects.RocketEntity;
 import org.millida.dunespiceflight.utils.EconomyManager;
 import org.millida.dunespiceflight.utils.TownyManager;
 
@@ -42,6 +43,8 @@ public class DuneSpiceFlightPlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        RocketEntity.getEntities().forEach(entity -> entity.remove());
+
         mainConfiguration.onSave();
         playersConfiguration.onSave();
     }

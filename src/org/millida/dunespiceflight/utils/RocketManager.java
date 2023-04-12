@@ -2,7 +2,9 @@ package org.millida.dunespiceflight.utils;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.millida.dunespiceflight.objects.RocketPlayerData;
@@ -19,7 +21,6 @@ public class RocketManager {
     private static double rocketMaxHeatlh;
     private static ItemStack rocketItem, rocketArmorHeadItem;
     private static List<ItemStack> rocketResources;
-    private static Map<String, Integer> tags;
 
     public static List<ItemStack> getRocketResources() {
         return rocketResources;
@@ -77,18 +78,10 @@ public class RocketManager {
         RocketManager.rocketMaxHeatlh = rocketMaxHeatlh;
     }
 
-    public static Map<String, Integer> getTags() {
-        return tags;
-    }
-
-    public static void setTags(Map<String, Integer> tags) {
-        RocketManager.tags = tags;
-    }
-
     public static RocketEntity spawnRocket(Location at) {
         ArmorStand rocketArmorStand = EntityUtil.spawnArmorStand(at, canArmorStandVisible, false, false, false, false, rocketMaxHeatlh);
         rocketArmorStand.setHelmet(rocketArmorHeadItem);
-        NMSManager.setNBTTags(rocketArmorStand, tags);
+        EntityUtil.setMetadata(rocketArmorStand, "dunespiceflightrocket", true);
 
         ArmorStand captainArmorStand = EntityUtil.spawnArmorStand(at.clone().add(0, 0, 1), canArmorStandVisible, true, false, false, false, rocketMaxHeatlh);
         ArmorStand passengerArmorStand1 = EntityUtil.spawnArmorStand(at.clone().add(-1.5, 0, -0.75), canArmorStandVisible, true, false, false, false, rocketMaxHeatlh);

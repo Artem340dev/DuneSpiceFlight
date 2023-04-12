@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.player.PlayerArmorStandManipulateEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
@@ -78,6 +79,12 @@ public class WorldHandler implements Listener {
 
         rocketEntity.remove();
         if (player != null) player.sendMessage(ChatUtil.parseColor(DuneSpiceFlightPlugin.CHAT_PREFIX + "Вы сломали ракету!"));
+    }
+
+    @EventHandler
+    public void onArmorStandManipulateEvent(PlayerArmorStandManipulateEvent event) {
+        if (!event.getRightClicked().hasMetadata("dunespiceflightrocket")) return;
+        event.setCancelled(true);
     }
 
     @EventHandler

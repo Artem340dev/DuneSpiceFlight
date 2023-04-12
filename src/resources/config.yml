@@ -19,7 +19,6 @@ rocketArmorHeadItem:
   lore: {}
   material: GOLD_INGOT
   customModelData: 123456789
-  tags: {}
 
 rocketMaxHealth: 700
 rocketPrice: 100000
